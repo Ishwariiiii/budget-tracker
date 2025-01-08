@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../Context/AppContext';
+import { MdCurrencyRupee } from "react-icons/md";
 
 const Remaining = () => {
     const { expenses, budget } = useContext(AppContext);
@@ -12,7 +13,7 @@ const Remaining = () => {
 
     return (
         <div className={`alert ${alertType}`}>
-            <span>Remaining: £{budget - totalExpenses}</span>
+            <span>Remaining: <MdCurrencyRupee /> {budget - totalExpenses}</span>
         </div>
     );
 };

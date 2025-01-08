@@ -14,15 +14,27 @@ const AppReducer = (state, action) => {
                     (expense) => expense.id !== action.payload
                 ),
             };
+            case 'EDIT_EXPENSE':
+                return {
+                    ...state,
+                    expenses: state.expenses.map(exp => 
+                        exp.id === action.payload.id ? action.payload : exp
+                    ),
+                };
+        case 'SET_BUDGET':
+            return {
+                ...state,
+                budget: action.payload,
+            };
         default:
             return state;
     }
 };
 
 const initialState = {
-    budget: 2000,
+    budget:1000,
     expenses: [
-        { id: 12, name: 'shopping', cost: 40 },
+        // { id: 12, name: 'shopping', cost:30 },
         // { id: 13, name: 'holiday', cost: 400 },
         // { id: 14, name: 'car service', cost: 50 },
     ],
