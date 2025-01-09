@@ -42,7 +42,7 @@ const App = () => {
             ) : (
                 <div className='container'>
                     <div className="header">
-                        <h1>Budget Tracker</h1>
+                        <h1 style={{fontFamily:"serif", fontWeight:"bold",fontStyle:"italic"}}>Budget-Tracker</h1>
                         <FaPlus
                         style={{height:"50px", width:"50px"}}
                             onClick={toggleAddExpenseForm}
@@ -68,14 +68,13 @@ const App = () => {
                             </div>
                         </div>
                     </div>
-
                     {showAddExpenseForm && (
                         <div className='mt-3'>
                             <AddExpenseForm closeModal={toggleAddExpenseForm} />
                         </div>
                     )}
 
-                    <h3 className='mt-3'>Expenses</h3>
+                    <h3 className='mt-3' style={{fontFamily:"serif", fontWeight:"bold",fontStyle:"italic"}}>Expenses</h3>
                     <div className='row mt-3'>
                         <div className='col-sm'>
                             {/* <div className="expense-list">
@@ -90,4 +89,4 @@ const App = () => {
     );
 };
 
-export default App;
+export default App

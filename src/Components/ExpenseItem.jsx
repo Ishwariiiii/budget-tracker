@@ -10,9 +10,9 @@ const ExpenseItem = ({ id, name, cost, onDelete, onEdit }) => {
             <div>
                 <span className='badge badge-primary badge-pill mr-3' style={{ backgroundColor: 'lightgreen', color: 'black' }}>
                     <MdCurrencyRupee /> {cost}
-                </span>
-                <TiDelete size='1.5em' onClick={() => onDelete(id)} style={{ cursor: 'pointer', color: 'red' }} />
-                <FaRegEdit size='1.5em' onClick={() => onEdit(id)} style={{ cursor: 'pointer', color: 'blue' }} />
+                </span> &nbsp;
+                <TiDelete size='1.9em' onClick={() => onDelete(id)} style={{ cursor: 'pointer', color: 'red' }} />&nbsp;&nbsp;
+                <FaRegEdit size='1.4em' onClick={() => onEdit(id)} style={{ cursor: 'pointer', color: 'blue' }} />
             </div>
         </li>
     );
