@@ -1,29 +1,26 @@
 import React, { useState, useContext } from 'react';
 import ExpenseItem from './ExpenseItem';
 import { AppContext } from '../Context/AppContext';
-import AddExpenseForm from './AddExpenseForm';  // Import AddExpenseForm
+import AddExpenseForm from './AddExpenseForm';  
 
 const ExpenseList = () => {
     const { expenses, dispatch } = useContext(AppContext);
     const [editingExpense, setEditingExpense] = useState(null);
-    const [isModalOpen, setIsModalOpen] = useState(false);  // State to control modal visibility
+    const [isModalOpen, setIsModalOpen] = useState(false);  
 
-    // Handle delete expense
     const handleDeleteExpense = (id) => {
         dispatch({ type: 'DELETE_EXPENSE', payload: id });
     };
 
-    // Handle edit expense
     const handleEditExpense = (id) => {
         const expenseToEdit = expenses.find((expense) => expense.id === id);
-        setEditingExpense(expenseToEdit);  // Store the expense details to edit
-        setIsModalOpen(true);  // Open the modal
+        setEditingExpense(expenseToEdit);  
+        setIsModalOpen(true); 
     };
 
-    // Close the modal (called from AddExpenseForm)
     const closeModal = () => {
         setIsModalOpen(false);
-        setEditingExpense(null);  // Reset the editingExpense state
+        setEditingExpense(null);
     };
 
     return (
@@ -36,16 +33,15 @@ const ExpenseList = () => {
                         name={expense.name}
                         cost={expense.cost}
                         onDelete={handleDeleteExpense}
-                        onEdit={handleEditExpense}  // Pass the edit function
+                        onEdit={handleEditExpense}
                     />
                 ))}
             </ul>
 
-            {/* Show the edit modal if an expense is being edited */}
             {isModalOpen && (
                 <AddExpenseForm
                     closeModal={closeModal}
-                    expenseToEdit={editingExpense}  // Pass the expense to edit
+                    expenseToEdit={editingExpense} 
                 />
             )}
         </div>

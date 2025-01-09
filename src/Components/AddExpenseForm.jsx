@@ -11,7 +11,7 @@ const AddExpenseForm = ({ closeModal, expenseToEdit }) => {
     const [cost, setCost] = useState('');
     const [open, setOpen] = useState(true);
 
-    // Populate the form with data if an expense is being edited
+
     useEffect(() => {
         if (expenseToEdit) {
             setName(expenseToEdit.name);
@@ -22,7 +22,7 @@ const AddExpenseForm = ({ closeModal, expenseToEdit }) => {
     const onSubmit = (event) => {
         event.preventDefault();
 
-        // Validate inputs
+    
         if (!name || !cost) {
             toast.warning('Please fill both fields', {
                 position: "top-right",
@@ -45,14 +45,12 @@ const AddExpenseForm = ({ closeModal, expenseToEdit }) => {
             return;
         }
 
-        // Create expense object
         const expense = {
             id: expenseToEdit ? expenseToEdit.id : uuidv4(),
             name: name,
             cost: parsedCost,
         };
 
-        // Dispatch either edit or add action
         if (expenseToEdit) {
             dispatch({
                 type: 'EDIT_EXPENSE',
@@ -65,7 +63,6 @@ const AddExpenseForm = ({ closeModal, expenseToEdit }) => {
             });
         }
 
-        // Reset form and close modal
         setName('');
         setCost('');
         closeModal();
