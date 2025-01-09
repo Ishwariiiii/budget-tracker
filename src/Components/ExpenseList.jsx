@@ -1,41 +1,51 @@
-import React, { useContext, useState } from 'react';
+import React, { useState, useContext } from 'react';
 import ExpenseItem from './ExpenseItem';
 import { AppContext } from '../Context/AppContext';
-import AddExpenseForm from './AddExpenseForm';
+import AddExpenseForm from './AddExpenseForm';  // Import AddExpenseForm
 
 const ExpenseList = () => {
-    const { expenses } = useContext(AppContext); 
-    const [expenseToEdit, setExpenseToEdit] = useState(null); 
-    const [modalOpen, setModalOpen] = useState(false);
+    const { expenses, dispatch } = useContext(AppContext);
+    const [editingExpense, setEditingExpense] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);  // State to control modal visibility
 
-    const handleEditExpense = (expense) => {
-        setExpenseToEdit(expense); 
-        setModalOpen(true); 
+    // Handle delete expense
+    const handleDeleteExpense = (id) => {
+        dispatch({ type: 'DELETE_EXPENSE', payload: id });
     };
 
+    // Handle edit expense
+    const handleEditExpense = (id) => {
+        const expenseToEdit = expenses.find((expense) => expense.id === id);
+        setEditingExpense(expenseToEdit);  // Store the expense details to edit
+        setIsModalOpen(true);  // Open the modal
+    };
+
+    // Close the modal (called from AddExpenseForm)
     const closeModal = () => {
-        setModalOpen(false);  
-        setExpenseToEdit(null);  
+        setIsModalOpen(false);
+        setEditingExpense(null);  // Reset the editingExpense state
     };
 
     return (
         <div>
-            <ul className='list-group' style={{backgroundColor:"red", color:"black"}}>
+            <ul className='list-group' style={{ backgroundColor: 'lightgray', color: 'black' }}>
                 {expenses.map((expense) => (
                     <ExpenseItem
                         key={expense.id}
                         id={expense.id}
                         name={expense.name}
                         cost={expense.cost}
-                        onEdit={handleEditExpense} 
+                        onDelete={handleDeleteExpense}
+                        onEdit={handleEditExpense}  // Pass the edit function
                     />
                 ))}
             </ul>
 
-            {modalOpen && (
+            {/* Show the edit modal if an expense is being edited */}
+            {isModalOpen && (
                 <AddExpenseForm
                     closeModal={closeModal}
-                    expenseToEdit={expenseToEdit}  
+                    expenseToEdit={editingExpense}  // Pass the expense to edit
                 />
             )}
         </div>
