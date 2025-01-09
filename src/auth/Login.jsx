@@ -1,6 +1,4 @@
 import React from "react";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { auth } from "../firebase";
 import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-toastify";  
 import "../App.css";
@@ -8,8 +6,6 @@ import "../App.css";
 const Login = ({ onLoginSuccess }) => {
     const googleSignIn = async () => {
         try {
-            const provider = new GoogleAuthProvider();
-            const result = await signInWithPopup(auth, provider);
             onLoginSuccess();
 
             toast.success("Login successful!", {
